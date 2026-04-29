@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting Settings</title>
+  </head>
+  <body>
+    <main id="content" class="panel">
+      <form id="settings-form" class="stack">
+        <label>
+          <span>Allowed countries</span>
+          <textarea id="countries" rows="7"></textarea>
+        </label>
+        <p class="hint">Separate countries with commas. These options appear in the vote form.</p>
+        <p id="message" class="message" role="status"></p>
+        <div class="actions">
+          <button type="submit" id="save-settings">Save settings</button>
+        </div>
+      </form>
+    </main>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script type="module" src="/settings.ts"></script>
+  </body>
+</html>

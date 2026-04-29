@@ -1,0 +1,212 @@
+:root {
+  color: #172b4d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  min-height: 34px;
+  border: 0;
+  border-radius: 4px;
+  padding: 7px 12px;
+  color: #ffffff;
+  background: #0c66e4;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #0055cc;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button.secondary {
+  color: #172b4d;
+  background: #dcdfe4;
+}
+
+button.secondary:hover:not(:disabled) {
+  background: #c7ccd1;
+}
+
+a {
+  color: #0c66e4;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+}
+
+small {
+  color: #626f86;
+  font-weight: 400;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+}
+
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #8590a2;
+  border-radius: 4px;
+  padding: 8px;
+  color: #172b4d;
+  background: #ffffff;
+}
+
+textarea {
+  resize: vertical;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-bottom: 1px solid #dcdfe4;
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: #44546f;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.connector {
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  gap: 8px;
+  padding: 24px;
+  text-align: center;
+}
+
+.panel {
+  padding: 12px;
+}
+
+.stack {
+  display: grid;
+  gap: 12px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.message {
+  min-height: 18px;
+  color: #216e4e;
+}
+
+.message.error {
+  color: #ae2a19;
+}
+
+.hint,
+.empty {
+  color: #626f86;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.pill {
+  display: inline-flex;
+  min-width: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: #172b4d;
+  background: #dcdfe4;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pill.danger {
+  color: #ae2a19;
+  background: #ffebe6;
+}
+
+.report-page {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #dcdfe4;
+  padding-bottom: 12px;
+}
+
+.toolbar p {
+  margin-top: 4px;
+  color: #626f86;
+}
+
+.report-content td:first-child {
+  min-width: 220px;
+}
+
+.button-link {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: #172b4d;
+  background: #dcdfe4;
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .toolbar,
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

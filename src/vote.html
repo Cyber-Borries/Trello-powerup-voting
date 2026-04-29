@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vote as Country</title>
+  </head>
+  <body>
+    <main id="content" class="panel">
+      <form id="vote-form" class="stack">
+        <label>
+          <span>Country</span>
+          <select id="country" required></select>
+        </label>
+
+        <label>
+          <span>Vote type</span>
+          <select id="vote-type" required>
+            <option value="s">Support</option>
+            <option value="b">Blocker</option>
+            <option value="n">Nice to have</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Comment <small id="comment-count">0/200</small></span>
+          <textarea id="comment" maxlength="200" rows="4" placeholder="Optional context for prioritization"></textarea>
+        </label>
+
+        <p id="message" class="message" role="status"></p>
+
+        <div class="actions">
+          <button type="button" id="remove-vote" class="secondary">Remove my vote</button>
+          <button type="submit" id="save-vote">Save vote</button>
+        </div>
+      </form>
+    </main>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script type="module" src="/vote.ts"></script>
+  </body>
+</html>
