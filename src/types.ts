@@ -81,6 +81,7 @@ export interface TrelloClient {
   closeModal(): Promise<void>;
   render(callback: () => void | Promise<void>): void;
   sizeTo(selector: string): Promise<void>;
+  signUrl(url: string, args?: Record<string, unknown>): string;
 }
 
 declare global {

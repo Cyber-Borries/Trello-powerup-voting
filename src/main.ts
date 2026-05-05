@@ -13,7 +13,7 @@ window.TrelloPowerUp.initialize({
       callback: (t: TrelloClient) =>
         t.popup({
           title: 'Vote as Country',
-          url: './vote.html',
+          url: t.signUrl('./vote.html'),
           height: 360
         })
     }
@@ -40,12 +40,12 @@ window.TrelloPowerUp.initialize({
     ];
   },
 
-  'card-back-section': (_t: TrelloClient) => ({
+  'card-back-section': (t: TrelloClient) => ({
     title: 'Country Votes',
     icon: ICON,
     content: {
       type: 'iframe',
-      url: './section.html',
+      url: t.signUrl('./section.html'),
       height: 220
     }
   }),
@@ -58,7 +58,7 @@ window.TrelloPowerUp.initialize({
       callback: (t: TrelloClient) =>
         t.modal({
           title: 'Voting Report',
-          url: './report.html',
+          url: t.signUrl('./report.html'),
           fullscreen: true
         })
     },
@@ -69,7 +69,7 @@ window.TrelloPowerUp.initialize({
       callback: (t: TrelloClient) =>
         t.modal({
           title: 'Voting Settings',
-          url: './settings.html',
+          url: t.signUrl('./settings.html'),
           height: 420
         })
     }
@@ -78,7 +78,7 @@ window.TrelloPowerUp.initialize({
   'show-settings': (t: TrelloClient) =>
     t.modal({
       title: 'Voting Settings',
-      url: './settings.html',
+      url: t.signUrl('./settings.html'),
       height: 420
     }),
 
