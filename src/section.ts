@@ -13,6 +13,14 @@ if (!powerUp) {
 
 const t = powerUp.iframe();
 
+content?.addEventListener('click', (event) => {
+  const target = event.target as HTMLElement;
+
+  if (target.closest('[data-action="vote"]')) {
+    void openVotePopup();
+  }
+});
+
 void renderSection();
 t.render(() => {
   void renderSection();
@@ -29,12 +37,21 @@ async function renderSection(): Promise<void> {
       .sort((a, b) => a.country.localeCompare(b.country));
 
     if (!votes.length) {
-      content.innerHTML = '<p class="empty">No country votes yet.</p>';
+      content.innerHTML = `
+        <div class="section-header">
+          <p class="empty">No country votes yet.</p>
+          <button type="button" data-action="vote">Vote as Country</button>
+        </div>
+      `;
       await t.sizeTo('#content');
       return;
     }
 
     content.innerHTML = `
+      <div class="section-header">
+        <p class="empty">${votes.length} ${votes.length === 1 ? 'country vote' : 'country votes'}</p>
+        <button type="button" data-action="vote">Vote as Country</button>
+      </div>
       <div class="table-wrap">
         <table>
           <thead>
@@ -70,6 +87,18 @@ async function renderSection(): Promise<void> {
     content.innerHTML = `<p class="message error">Could not load country votes. ${escapeHtml(String(error))}</p>`;
     await t.sizeTo('#content');
   }
+}
+
+async function openVotePopup(): Promise<void> {
+  await t.popup({
+    title: 'Vote as Country',
+    url: t.signUrl('./vote.html'),
+    height: 360
+  });
+
+  window.setTimeout(() => {
+    void renderSection();
+  }, 500);
 }
 
 function escapeHtml(value: string): string {
