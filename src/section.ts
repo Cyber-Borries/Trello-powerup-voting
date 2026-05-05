@@ -1,8 +1,17 @@
 import './styles.css';
 import { formatDate, getVotes, toVoteView } from './storage';
 
-const t = window.TrelloPowerUp.iframe();
+const STORAGE_TIMEOUT_MS = 8000;
+
 const content = document.querySelector<HTMLElement>('#section-content');
+const powerUp = window.TrelloPowerUp;
+
+if (!powerUp) {
+  showStartupError('Trello Power-Up client did not load.');
+  throw new Error('Trello Power-Up client did not load.');
+}
+
+const t = powerUp.iframe();
 
 void renderSection();
 t.render(() => {
@@ -15,7 +24,9 @@ async function renderSection(): Promise<void> {
   }
 
   try {
-    const votes = (await getVotes(t)).map(toVoteView).sort((a, b) => a.country.localeCompare(b.country));
+    const votes = (await withTimeout(getVotes(t), STORAGE_TIMEOUT_MS, 'Trello storage did not respond.'))
+      .map(toVoteView)
+      .sort((a, b) => a.country.localeCompare(b.country));
 
     if (!votes.length) {
       content.innerHTML = '<p class="empty">No country votes yet.</p>';
@@ -71,5 +82,30 @@ function escapeHtml(value: string): string {
       "'": '&#39;'
     };
     return entities[char];
+  });
+}
+
+function showStartupError(text: string): void {
+  if (content) {
+    content.innerHTML = `<p class="message error">${escapeHtml(text)}</p>`;
+  }
+}
+
+function withTimeout<T>(promise: Promise<T>, timeoutMs: number, message: string): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timeoutId = window.setTimeout(() => {
+      reject(new Error(message));
+    }, timeoutMs);
+
+    promise.then(
+      (value) => {
+        window.clearTimeout(timeoutId);
+        resolve(value);
+      },
+      (error) => {
+        window.clearTimeout(timeoutId);
+        reject(error);
+      }
+    );
   });
 }
